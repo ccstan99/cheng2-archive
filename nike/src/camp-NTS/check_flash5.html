@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Nike Team Uniform Builder</title>
+
+<script LANGUAGE="JavaScript"><!--
+var useFlash = navigator.mimeTypes &&
+navigator.mimeTypes["application/x-shockwave-flash"] &&
+navigator.mimeTypes["application/x-shockwave-flash"].enabledPlugin;
+function setup() 
+{
+	if ((navigator.appName == "Microsoft Internet Explorer" &&
+navigator.appVersion.indexOf("Mac") == -1 && navigator.appVersion.indexOf("3.1") == -1) ||
+
+	(navigator.plugins && navigator.plugins["Shockwave Flash"])
+	|| navigator.plugins["Shockwave Flash 2.0"]){
+	}
+	else {
+	window.location='get_flash5.html';
+	}
+
+	getWidth = screen.availWidth;
+	getHeight = screen.availHeight;
+	widthPos = getWidth / 2 - 400;
+	heightPos = getHeight / 2 - 300;
+	self.moveTo(widthPos,heightPos);
+	self.focus();
+}
+// -->
+</SCRIPT>
+<script LANGUAGE="VBScript">
+<!--
+On error resume next
+useFlash = NOT IsNull(CreateObject("ShockwaveFlash.ShockwaveFlash"))
+-->
+</script>
+<script>
+if (!useFlash) {
+	window.location = "get_flash5.html";
+}
+</script>
+</head>
+<body bgcolor="#FFFFFF" marginheight=0 marginwidth=0 topmargin=0 leftmargin=0 ONLOAD="setup();">
+
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+ codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
+ WIDTH=797 HEIGHT=100%>
+<param NAME=movie VALUE="check_flash5.swf?file=builder.swf"> <param NAME=base VALUE="."> <param NAME=quality VALUE=high> <param NAME=bgcolor VALUE=#FFFFFF>
+<embed src="check_flash5.swf?file=builder.swf" WIDTH=797 HEIGHT=100% quality=high bgcolor=#FFFFFF TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" base="."></embed>
+</object>
+</body>
+</html>

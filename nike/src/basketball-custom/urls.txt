@@ -1,0 +1,3 @@
+&membersLink=http://www.niketeam.com/v2/new/Members/Login.asp&
+&dealersLink=http://www.niketeam.com/v2/new/DealerList.asp&
+&builderLink=http://www.niketeam.com/v2/new/Builders/HardwoodMen/check_flash5.asp&

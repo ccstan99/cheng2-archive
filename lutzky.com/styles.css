@@ -1,0 +1,34 @@
+.bodyText { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc }
+.bodyTextBold { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; font-weight: bold; color: #cccccc }
+.title {font-family: "book antiqua", Times, serif; font-size: 12pt; font-weight: bold; color: #339999 }
+.projtitle {font-family: "book antiqua", Times, serif; font-size: 11pt; font-weight: bold; color: #339999 }
+.tealText { font-size: 8pt; color: #339999 }
+.subtitle { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; font-weight: bold; text-transform:uppercase; color: #339999 }
+.footText { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #666666 }
+
+a.footLink { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #666666; text-decoration:none }
+a.footLink:link { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #666666; text-decoration:none }
+a.footLink:visited { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #666666; text-decoration:none }
+a.footLink:active { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #999999; text-decoration:none }
+a.footLink:hover { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #999999; text-decoration:none }
+
+.caption { font-family: verdana,helvetica,arial,sans-serif; font-size: 7pt; color: #666666; text-align:right }
+.refText { font-family: verdana,helvetica,arial,sans-serif; font-size: 7pt; color: #cccccc }
+
+a.bodyLink { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc }
+a.bodyLink:link { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc }
+a.bodyLink:visited { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc }
+a.bodyLink:active { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #339999 }
+a.bodyLink:hover { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #339999 }
+
+a.bodyLinkNoDec { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc; text-decoration:none }
+a.bodyLinkNoDec:link { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc; text-decoration:none }
+a.bodyLinkNoDec:visited { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #cccccc; text-decoration:none }
+a.bodyLinkNoDec:active { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #339999; text-decoration:none }
+a.bodyLinkNoDec:hover { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #339999; text-decoration:none }
+
+a.detailNav { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #999999; text-decoration:none; }
+a.detailNav:link { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #999999; text-decoration:none; }
+a.detailNav:visited { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #999999; text-decoration:none; }
+a.detailNav:active { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #ffffff; text-decoration:none; }
+a.detailNav:hover { font-family: verdana,helvetica,arial,sans-serif; font-size: 8pt; color: #ffffff; text-decoration:none; }

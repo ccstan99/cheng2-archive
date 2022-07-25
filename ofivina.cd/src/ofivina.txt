@@ -1,0 +1,291 @@
+-- GLOBAL --
+global gShocked
+global gArtistList
+global gNameLookup
+global gCodeLookup
+global gPopupSprite
+global gPopupSpriteNum
+global gPopupButtonNum
+global gContentSpriteNum
+global gVideoSpriteNum
+global gScrollSpriteNum
+global gNavSpriteNum
+
+global theArtist
+global pieceNum
+global piecesTotal
+global code
+global songPlaying
+
+-- PROPERTIES --
+property spriteNum
+property mySprite
+property actionType
+property selectedNum
+
+-- EVENT HANDLERS --
+on beginSprite me
+  mySprite = sprite (me.spriteNum)
+end
+
+on mouseUp me
+  if gShocked then return
+  
+  case actionType of
+    "unhide" : 
+      
+      pieceNum = 0
+      
+      if (mySprite.member.type = #field) then
+        -- clicked on field, get name from text
+        -- put the mouseWord, the mouseLine        
+        theName = mySprite.member.line[the mouseLine]
+        theArtist = gArtistList.child[indexOf(theName)]
+        code = theArtist.attributeValue["code"]
+      else
+        -- clicked on button/img/shape, get name from label
+        code = mySprite.member.name
+        if (code.length > 5) then
+          pieceNum = integer(code.char[code.length])
+          code = code.char[1..5]
+        end if
+        
+        theArtist = gArtistList.child[gCodeLookup[symbol(code)]]
+        theName = theArtist.attributeValue["name"]
+      end if
+      
+      piecesTotal = value(theArtist.attributeValue["num"])
+      showPopup
+      
+    "hide" : 
+      hidePopup
+      
+    "show" : 
+      pieceNum = selectedNum
+      showPopup
+      
+    "next" : 
+      pieceNum = pieceNum + 1
+      showPopup
+      
+    otherwise: 
+      nothing
+  end case
+  
+end mouseUp
+
+-- CUSTOM HANDLERS --
+on initPopup
+  gShocked = false
+  if gShocked then return
+  
+  parserObj = new(xtra "xmlparser")
+  theText = member("artistList_xml").text
+  errCode = parserObj.parseString(theText)
+  -- errCode = gParserObject.parseURL("artistList.xml")
+  theList = parserObj.makeList()
+  gArtistList = parserObj.child[1]
+  numArtists = gArtistList.child.count
+  
+  gNameLookup = [:]
+  gCodeLookup = [:]
+  repeat with i = 1 to numArtists
+    theArtist = gArtistList.child[i]
+    theIndex = symbolOf(theArtist.attributeValue["name"])
+    gNameLookup.addProp(theIndex, i)
+    theIndex = symbol(theArtist.attributeValue["code"])
+    gCodeLookup.addProp(theIndex, i)
+  end repeat
+  
+  -- use constants
+  gNavSpriteNum = 22
+  gContentSpriteNum = 35
+  gPopupSpriteNum = 50
+  gPopupButtonNum = gPopupSpriteNum + 10
+  gPopupSprite = sprite(gPopupSpriteNum)  
+  gVideoSpriteNum = gPopupSpriteNum + 1
+  
+  songPlaying= ""
+  
+end initPopup
+
+on showPopup theName
+  
+  if pieceNum > piecesTotal then return
+  
+  sprite(gPopupSpriteNum).visible = true  
+  sprite(gVideoSpriteNum).visible = false
+  
+  if (pieceNum = 0) then
+    member("artistTitle").text = theArtist.attributeValue["name"]    
+    member("artistFoto").fileName = "@:lib:0NoBio.jpg"
+    member("artistFoto").fileName = "@:lib:" & code & ".jpg"
+    
+    if member("artistFoto").fileName contains "0NoBio" then
+      member("desc").text = member(code, "profiles").text
+      member("desc").tabs = member(code, "profiles").tabs
+      member("desc").alignment = #left
+      gPopupSprite.member = member("popupText")
+    else
+      member("artistBio").text = member(code, "profiles").text
+      member("artistBio").tabs = member(code, "profiles").tabs
+      member("artistBio").alignment = #left
+      gPopupSprite.member = member("popupProfile")      
+      
+      links = member(code, "profiles").hyperlinks
+      repeat with i = 1 to links.count
+        startPos = links[i][1]
+        endPos = links[i][2]
+        
+        member("artistBio").char[startPos..endPos].hyperlink = member(code, "profiles").char[startPos..endPos].hyperlink
+        --member("artistBio").char[startPos..endPos].fontStyle = [#underline]
+      end repeat
+      
+    end if    
+    
+  else
+    
+    member("artistTitle").text = theArtist.attributeValue["name"] && ":" && theArtist.attributeValue["title" & pieceNum] 
+    
+    case theArtist.attributeValue["ext" & pieceNum] of
+      "mov":         
+        if (sound(1).volume > 0) then 
+          sound(1).fadeOut(1000)  
+        else
+          sound(1).stop()
+        end if
+        
+        member("artistVideo").fileName = "@:lib:0NoPhoto.jpg" 
+        member("artistVideo").fileName = "@:lib:" & code & "0" & pieceNum & ".mov" 
+        if (gPopupSprite.member <> member("popupVideo")) then
+          gPopupSprite.member = member("popupVideo")
+        end if
+        sprite(gVideoSpriteNum).member = member("artistVideo")
+        sprite(gVideoSpriteNum).visible = true
+        
+      "mp3", "txt" :
+        gPopupSprite.member = member("popupText")
+        songName = "@:lib:" & code & "0" & pieceNum & ".mp3"
+        
+        if (sound(1).isBusy()) and (sound(1).volume>0) and (songName = songPlaying) then
+        else
+          sound(1).stop()
+          sound playFile 1, songName
+          sound(1).volume = 255  
+          songPlaying = songName     
+        end if
+        
+      "jpg": 
+        member("artistGraphic").fileName = "@:lib:0NoPhoto.jpg" 
+        member("artistGraphic").fileName = "@:lib:" & code & "0" & pieceNum & ".jpg"
+        if (gPopupSprite.member <> member("popupGraphic")) then
+          gPopupSprite.member = member("popupGraphic")
+        end if
+        
+      otherwise: 
+        nothing
+    end case
+    
+    member("desc").text = member(code & "0" & pieceNum, "description").text
+    member("desc").tabs = member(code & "0" & pieceNum, "description").tabs
+    
+  end if
+  
+  -- show popup window and buttons
+  repeat with i = gVideoSpriteNum + 1 to (gPopupButtonNum + piecesTotal)
+    sprite(i).visible = true
+  end repeat
+  
+  -- hilite selected
+  sprite(gPopupButtonNum - 1).loc = sprite(gPopupButtonNum + pieceNum).loc
+  sprite(gPopupButtonNum + pieceNum).visible = false
+  
+  member("desc").scrollByPage(-10)
+  
+  -- hide more buttons if no scrolling
+  -- if (pieceNum = 0) or (member("desc").lineCount < 37) then 
+  if (pieceNum = 0) or (not (member("desc").text contains (TAB & TAB & TAB))) then 
+    sprite(gPopupSpriteNum + 4).visible = false
+    sprite(gPopupSpriteNum + 5).visible = false
+  end if
+  
+  -- hide next buttons if no more
+  if pieceNum = piecesTotal then 
+    sprite(gPopupSpriteNum + 6).visible = false
+    sprite(gPopupSpriteNum + 7).visible = false
+  end if
+  
+  -- hide content sprites underneath to disable buttons
+  repeat with i = gContentSpriteNum to (gPopupSpriteNum-1)
+    sprite(i).visible = false
+  end repeat
+  
+  -- hide nav sprites underneath to disable buttons
+  repeat with i = gNavSpriteNum to (gNavSpriteNum+3)
+    sprite(i).visible = false
+  end repeat
+  
+end showPopup
+
+on hidePopup
+  gPopupSprite.member = value(void)
+  --  if (gPopupSprite.member = member("popupHide") or (the frame = 1)) then
+  --    gPopupSprite.member = value(void)
+  --  else
+  --    gPopupSprite.member = member("popupHide")
+  --  end if
+  
+  -- directToStage QT disables all buttons underneath even if hidden
+  sprite(gVideoSpriteNum).member = value(void)
+  
+  repeat with i = gPopupSpriteNum to (gPopupSpriteNum+20)
+    sprite(i).visible = false
+  end repeat
+  
+  repeat with i = gContentSpriteNum to (gPopupSpriteNum-1)
+    sprite(i).visible = true
+  end repeat
+  
+  repeat with i = gNavSpriteNum to (gNavSpriteNum+3)
+    sprite(i).visible = true
+  end repeat
+  
+  if (songPlaying.length > 0) then
+    sound(1).fadeOut(1000)        
+  end if
+  songPlaying = ""
+  
+end hidePopup
+
+on symbolOf theName
+  lookupName = ""
+  
+  repeat with i = 1 to theName.length
+    theChar = theName.char[i]
+    if (theChar >= "a") and (theChar <= "z") then
+      lookupName = lookupName & theChar
+    end if    
+  end repeat
+  
+  return symbol(lookupName)  
+end
+
+on indexOf theName
+  theSymbol = symbolOf(theName)
+  return gNameLookup.getProp(theSymbol)  
+end
+
+on getPropertyDescriptionList me
+  return [ \
+  #actionType : [\
+      #comment: "Action to perform on popup", \
+      #format: #string, \
+      #default: "unhide", \
+      #range: ["unhide", "hide", "show", "next" ]],\
+  #selectedNum : [\
+      #comment: "lib piece number to show", \
+      #format: #integer, \
+      #default: -1, \
+      #range: [#min:-1, #max:7]] \
+  ]
+end getPropertyDescriptionList
