@@ -5,27 +5,21 @@ Samples from Cheng2 Designs archived portfolio ([video demo](https://www.youtube
 ## Interactive Projects
 #### [Nike Team Sports](nike): suite of uniform builders for basketball, baseball, football, camp series
 
-<img src="nike/nike3.jpg" />
-<img src="nike/nike4.jpg" />
+<img src="nike/nike3.jpg" /> <img src="nike/nike4.jpg" />
 
 #### [Refractec](refractec): eye surgery equipment tutorial for Ignite Health
 
-<img src="refractec/refractec2.jpg" />
-<img src="refractec/refractec3.jpg" />
+<img src="refractec/refractec2.jpg" /> <img src="refractec/refractec3.jpg" />
 
 #### [Ofivina 01](ofivina.cd): cd-rom commemorating Ofivina arts exhibit & festival
 
-<img src="ofivina.cd/ofivina1.jpg" />
-<img src="ofivina.cd/ofivina2.jpg" />
+<img src="ofivina.cd/ofivina1.jpg" /> <img src="ofivina.cd/ofivina2.jpg" />
 
 ## Websites
 
-<img src="portfolio/cheng2-web.png" height="200" />
-<img src="portfolio/freearts-web.png" height="200" />
-<img src="portfolio/sawmeetsaw-web.png" height="200" />
-<img src="portfolio/otto-web.png" height="200" />
-<img src="portfolio/emily-web.png" height="200" />
-<img src="portfolio/lutzky-web.png" height="200" />
+<img src="portfolio/cheng2-web.png" height="200" /> <img src="portfolio/freearts-web.png" height="200" />
+<img src="portfolio/sawmeetsaw-web.png" height="200" /> <img src="portfolio/otto-web.png" height="200" />
+<img src="portfolio/emily-web.png" height="200" /> <img src="portfolio/lutzky-web.png" height="200" />
 
 ## Logos
 
@@ -33,10 +27,7 @@ Samples from Cheng2 Designs archived portfolio ([video demo](https://www.youtube
 
 ## Print Layout
 
-<img src="portfolio/shh-fotos-cartridge.jpg" width="200" />
-<img src="portfolio/shh-fotos-mailers.jpg" width="200" />
-<img src="portfolio/zing-fotos-choco.jpg" width="200" />
-<img src="portfolio/zing-fotos-spice.jpg" width="200" />
+<img src="portfolio/shh-fotos-cartridge.jpg" width="200" /> <img src="portfolio/shh-fotos-mailers.jpg" width="200" /> <img src="portfolio/zing-fotos-choco.jpg" width="200" /> <img src="portfolio/zing-fotos-spice.jpg" width="200" />
 
 ## Publications
 - [Ancient Resumé](resume-2002.pdf)
